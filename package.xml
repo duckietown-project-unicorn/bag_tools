@@ -1,0 +1,18 @@
+<package>
+  <name>bag_tools</name>
+  <version>1.0.0</version>
+  <description>
+    Useful auxiliary bag tools. 
+  </description>
+  <maintainer email="sischaef@ethz.ch">Simon Schaefer</maintainer>
+  <license>GPLv3</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>rospy</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+
+  <run_depend>rospy</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+
+</package>

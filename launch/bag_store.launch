@@ -1,0 +1,14 @@
+<launch>
+
+    <arg name="rosbag" default="" doc="rosbag file" />
+    <arg name="img_topic" default="1" doc="image topic name" />
+    <arg name="storage_dir" default="0.1" doc="target storage directory" />
+
+    <node pkg="rosbag" type="play" name="rosbag" args="$(arg rosbag)"/>
+
+    <node name="imagemsg_to_png" pkg="bag_tools" type="imagemsg_to_png.py"  output="screen">
+        <param name="img_topic" value="$(arg img_topic)"/>
+        <param name="storage_dir" value="$(arg storage_dir)"/>
+    </node>
+
+</launch>
