@@ -2,22 +2,20 @@
 ###############################################################################
 # Duckietown - Project Unicorn ETH
 # Author: Simon Schaefer
-# Python ROS node to estimate robot's pose based on color filtering the input
-# image (robot tagged with scene-unique color strip) and exploiting the known
-# intersection structure. 
+# Subscribe and store compressed image. 
 ###############################################################################
 import cv2
 from cv_bridge import CvBridge, CvBridgeError
 from os.path import isdir
 import rospy
-from sensor_msgs.msg import Image
+from sensor_msgs.msg import CompressedImage
 
 class Main(): 
 
     def __init__(self): 
         self.bridge = CvBridge()
         topic = rospy.get_param("/imagemsg_to_png/img_topic")
-        rospy.Subscriber(topic, Image, self.callback)
+        rospy.Subscriber(topic, CompressedImage, self.callback)
         self.i = 0
         self.storage_path = rospy.get_param("/imagemsg_to_png/storage_dir")
         if not isdir(self.storage_path): 
@@ -27,7 +25,7 @@ class Main():
     def callback(self, data):
         """Store message data as png."""
         try: 
-            frame = self.bridge.imgmsg_to_cv2(data, "bgr8")
+            frame = self.bridge.compressed_imgmsg_to_cv2(data, "bgr8")
         except CvBridgeError as e:
             rospy.logfatal(e)
         name = self.storage_path + "/" + str(self.i) + ".png"
