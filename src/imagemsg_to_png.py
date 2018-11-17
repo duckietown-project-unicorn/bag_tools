@@ -16,10 +16,10 @@ class Main():
 
     def __init__(self): 
         self.bridge = CvBridge()
-        topic = rospy.get_param("img_topic")
+        topic = rospy.get_param("/imagemsg_to_png/img_topic")
         rospy.Subscriber(topic, Image, self.callback)
         self.i = 0
-        self.storage_path = rospy.get_param("storage_dir")
+        self.storage_path = rospy.get_param("/imagemsg_to_png/storage_dir")
         if not isdir(self.storage_path): 
             raise OSError("Invalid storage path !")
         rospy.spin()
